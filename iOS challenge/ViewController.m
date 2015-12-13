@@ -16,12 +16,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    scroller.contentSize=CGSizeMake(320,1200);
-    scroller_genre.contentSize=CGSizeMake(1000,60);
+    
 
     [self movie];
-
-
+    [self rate_movie];
+    
    
 
     // Do any additional setup after loading the view, typically from a nib.
@@ -53,7 +52,7 @@
 }
 
 -(void)movie_parse:(NSDictionary*)json {
-    
+
     MoviePicture = [[NSMutableArray alloc]init];
     Movie_Name = [[NSMutableArray alloc]init];
     Release_date = [[NSMutableArray alloc]init];
@@ -106,9 +105,16 @@
 
 -(void)movie_credits_parse:(NSDictionary*)json {
     
-  //  NSLog(@"%@",[[json valueForKeyPath:@"cast"]valueForKey:@"character"]);
+    Character = [[NSMutableArray alloc]init];
+    Name = [[NSMutableArray alloc]init];
+    Picture = [[NSMutableArray alloc]init];
+
+    [Character addObjectsFromArray:[[json valueForKeyPath:@"cast"]valueForKey:@"character"]];
+    [Name addObjectsFromArray:[[json valueForKeyPath:@"cast"]valueForKey:@"name"]];
+    [Picture addObjectsFromArray:[[json valueForKeyPath:@"cast"]valueForKey:@"profile_path"]];
     
-    
+  
+
 }
 
 -(void)movie_video
@@ -173,6 +179,7 @@
     
     lb_movie_name.text = [Movie_Name objectAtIndex:0];
     lb_rating.text = @"Rating:";
+    lb_movie_rating.text = @"R";
     lb_release.text = @"Release Date:";
     lb_run.text = @"Run Time:";
     lb_revenue.text = @"Revenue:";
@@ -207,7 +214,72 @@
     lb_movie_vote_average.text = [NSString stringWithFormat:@"%@",[Vote_average objectAtIndex:0]];
     lb_movie_vote_count.text = [NSString stringWithFormat:@"%@%@%@",@"(",[Vote_count objectAtIndex:0],@" votes)"];
     
-   
+    float number =[[Vote_average objectAtIndex:0]floatValue];
+    
+    if((number > 0.0)&&(number < 1.0))
+    {
+        rate_m = 1;
+        [self myTapMethod];
+        
+    }else
+    if((number > 1.0)&&(number < 2.0))
+    {
+        rate_m = 1;
+
+        [self myTapMethod1];
+    }
+    else
+    if((number > 2.0)&&(number < 3.0))
+    {
+        rate_m = 1;
+
+        [self myTapMethod2];
+    }
+    else
+    if((number > 3.0)&&(number < 4.0))
+    {
+        rate_m = 1;
+
+        [self myTapMethod3];
+    }
+    else
+    if((number > 4.0)&&(number < 5.0))
+    {
+        rate_m = 1;
+
+        [self myTapMethod4];
+    }
+    else
+    if((number > 5.0)&&(number < 6.0))
+    {
+        rate_m = 1;
+
+        [self myTapMethod5];
+    }else
+    if((number > 6.0)&&(number < 7.0))
+    {
+        rate_m = 1;
+
+        [self myTapMethod6];
+    }else
+    if((number > 7.0)&&(number < 8.0))
+    {
+        rate_m = 1;
+
+        [self myTapMethod7];
+    }else
+    if((number > 8.0)&&(number < 9.0))
+    {
+        rate_m = 1;
+
+        [self myTapMethod8];
+    }else
+    if((number > 9.0)&&(number < 10.0))
+    {
+        rate_m = 1;
+
+        [self myTapMethod9];
+    }
     
     for(int i=0; i<[Genres count];i++)
     {
@@ -248,9 +320,134 @@
  
     lb_cast.text = @"CAST";
 
+ 
+
+    for(int i=0; i<[Character count];i++)
+    {
+        
+        NSURL * imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",@"http://image.tmdb.org/t/p/w500",[Picture objectAtIndex:i]]];
+        
+        NSData * imageData = [NSData dataWithContentsOfURL:imageURL];
+        UIImage * image = [UIImage imageWithData:imageData];
+        
+        img_picture =[[UIImageView alloc]init];
+        
+        img_picture.image = image;
+        [cast_view addSubview:img_picture];
+
+        cast_view.translatesAutoresizingMaskIntoConstraints = NO;
+        img_picture.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        [cast_view addConstraint:[NSLayoutConstraint constraintWithItem:img_picture
+                                                              attribute:NSLayoutAttributeTop
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:cast_view
+                                                              attribute:NSLayoutAttributeTop
+                                                             multiplier:1
+                                                               constant:0]];
+        
+        [cast_view addConstraint:[NSLayoutConstraint constraintWithItem:img_picture
+                                                                 attribute:NSLayoutAttributeWidth
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:nil
+                                                                 attribute:NSLayoutAttributeNotAnAttribute
+                                                                multiplier:1.0
+                                                                  constant:50]];
+        [cast_view addConstraint:[NSLayoutConstraint constraintWithItem:img_picture
+                                                                 attribute:NSLayoutAttributeHeight
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:nil
+                                                                 attribute:NSLayoutAttributeNotAnAttribute
+                                                                multiplier:1.0
+                                                                  constant:60]];
+
+        if(i==0)
+        {
+            [cast_view addConstraint:[NSLayoutConstraint constraintWithItem:img_picture
+                                                                  attribute:NSLayoutAttributeLeading
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:cast_view
+                                                                  attribute:NSLayoutAttributeLeading
+                                                                 multiplier:1
+                                                                   constant:30]];
+            
+        }
+        else
+        {
+            [cast_view addConstraint:[NSLayoutConstraint constraintWithItem:img_picture
+                                                                  attribute:NSLayoutAttributeLeading
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:cast_view
+                                                                  attribute:NSLayoutAttributeLeading
+                                                                 multiplier:1
+                                                                   constant:(i*100)+40]];
+            
+        }
+        
+        
+
+        lb_name=[[UILabel alloc]init];
+        lb_name.text =[Name objectAtIndex:i];
+        lb_name.textColor = [UIColor whiteColor];
+        lb_name.font = [UIFont systemFontOfSize:10.0f];
+        
+        
+        [cast_view addSubview:lb_name];
+        
+        cast_view.translatesAutoresizingMaskIntoConstraints = NO;
+        lb_name.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        [cast_view addConstraint:[NSLayoutConstraint constraintWithItem:lb_name
+                                                              attribute:NSLayoutAttributeTop
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:cast_view
+                                                              attribute:NSLayoutAttributeTop
+                                                             multiplier:1
+                                                               constant:60]];
+       
+        [cast_view addConstraint:[NSLayoutConstraint constraintWithItem:lb_name
+                                                              attribute:NSLayoutAttributeCenterX
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:img_picture
+                                                              attribute:NSLayoutAttributeCenterX
+                                                             multiplier:1
+                                                               constant:0]];
+            
     
-    
-    
+        
+     
+        
+        lb_character=[[UILabel alloc]init];
+        lb_character.text =[NSString stringWithFormat:@"%@%@",@"- ",[Character objectAtIndex:i]];
+        lb_character.textColor = [UIColor colorWithRed:130.0/255.0 green:129.0/255.0 blue:128.0/255.0 alpha:1.0];
+        lb_character.font = [UIFont italicSystemFontOfSize:10.0f];
+        
+        
+        [cast_view addSubview:lb_character];
+        
+        cast_view.translatesAutoresizingMaskIntoConstraints = NO;
+        lb_character.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        
+        [cast_view addConstraint:[NSLayoutConstraint constraintWithItem:lb_character
+                                                              attribute:NSLayoutAttributeTop
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:cast_view
+                                                              attribute:NSLayoutAttributeTop
+                                                             multiplier:1
+                                                               constant:70]];
+        
+        [cast_view addConstraint:[NSLayoutConstraint constraintWithItem:lb_character
+                                                              attribute:NSLayoutAttributeCenterX
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:lb_name
+                                                              attribute:NSLayoutAttributeCenterX
+                                                             multiplier:1
+                                                               constant:0]];
+        
+    }
+
+
     
     lb_story.text = @"STORYLINE";
 
@@ -270,12 +467,342 @@
     btn_share.layer.borderWidth = 0.8;
 }
 
+
+
 -(IBAction)play_button
 {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",@"http://www.youtube.com/watch?v=",[Trailer objectAtIndex:0]]]];
 
 }
 
+-(void)rating
+{
+
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",@"http://api.themoviedb.org/3/movie/264660/rating?guest_session_id=",[guest_id objectAtIndex:0],@"&api_key=ea793354ae0aae7ec17fd6d6f5f692a2"]];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+    [request setHTTPMethod:@"POST"];
+    
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    
+    NSString *post = [[NSString alloc] initWithFormat:@"%@%@%@",@"{\n  \"value\": ",ocena,@"}"];
+    
+    
+    [request setHTTPBody:[post dataUsingEncoding:NSUTF8StringEncoding]];
+
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                            completionHandler:
+                                  ^(NSData *data, NSURLResponse *response, NSError *error) {
+                                      
+                                      if (error) {
+                                          // Handle error...
+                                          return;
+                                      }
+                                      
+                                      if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                                          NSLog(@"Response HTTP Status code: %ld\n", (long)[(NSHTTPURLResponse *)response statusCode]);
+                                          NSLog(@"Response HTTP Headers:\n%@\n", [(NSHTTPURLResponse *)response allHeaderFields]);
+                                      }
+                                      
+                                      NSString* body = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                                      NSLog(@"Response Body:\n%@\n", body);
+                                
+                                      
+                                     
+                                  }];
+    [task resume];
+    
+    
+   
+}
+
+-(void)guest
+{
+    
+
+    NSURL *URL = [NSURL URLWithString:@"http://api.themoviedb.org/3/authentication/guest_session/new?api_key=ea793354ae0aae7ec17fd6d6f5f692a2"];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+    [request setHTTPMethod:@"GET"];
+    
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                            completionHandler:
+                                  ^(NSData *data, NSURLResponse *response, NSError *error) {
+                                      
+                                      if (error) {
+                                          // Handle error...
+                                          return;
+                                      }
+                                      
+                                      if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                                          NSLog(@"Response HTTP Status code: %ld\n", (long)[(NSHTTPURLResponse *)response statusCode]);
+                                          NSLog(@"Response HTTP Headers:\n%@\n", [(NSHTTPURLResponse *)response allHeaderFields]);
+                                      }
+                                      
+                                      NSString* body = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                                      NSError *err = nil;
+
+                                      NSDictionary *dictResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
+
+                                      NSLog(@"Response Body:\n%@\n", body);
+                                      
+                                      guest_id = [[NSMutableArray alloc]init];
+                                      [guest_id addObject:[dictResponse objectForKey:@"guest_session_id"]];
+                                      
+                                      [self rating];
+
+                                  }];
+    [task resume];
+}
+
+-(void)rate_movie
+{
+
+    UITapGestureRecognizer *newTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(myTapMethod)];
+    UITapGestureRecognizer *newTap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(myTapMethod1)];
+    UITapGestureRecognizer *newTap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(myTapMethod2)];
+    UITapGestureRecognizer *newTap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(myTapMethod3)];
+    UITapGestureRecognizer *newTap4 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(myTapMethod4)];
+    UITapGestureRecognizer *newTap5 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(myTapMethod5)];
+    UITapGestureRecognizer *newTap6 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(myTapMethod6)];
+    UITapGestureRecognizer *newTap7 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(myTapMethod7)];
+    UITapGestureRecognizer *newTap8 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(myTapMethod8)];
+    UITapGestureRecognizer *newTap9 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(myTapMethod9)];
+
+    
+    [star1 setUserInteractionEnabled:YES];
+    [star2 setUserInteractionEnabled:YES];
+    [star3 setUserInteractionEnabled:YES];
+    [star4 setUserInteractionEnabled:YES];
+    [star5 setUserInteractionEnabled:YES];
+    [star6 setUserInteractionEnabled:YES];
+    [star7 setUserInteractionEnabled:YES];
+    [star8 setUserInteractionEnabled:YES];
+    [star9 setUserInteractionEnabled:YES];
+    [star10 setUserInteractionEnabled:YES];
+    
+    [star1 addGestureRecognizer:newTap];
+    [star2 addGestureRecognizer:newTap1];
+    [star3 addGestureRecognizer:newTap2];
+    [star4 addGestureRecognizer:newTap3];
+    [star5 addGestureRecognizer:newTap4];
+    [star6 addGestureRecognizer:newTap5];
+    [star7 addGestureRecognizer:newTap6];
+    [star8 addGestureRecognizer:newTap7];
+    [star9 addGestureRecognizer:newTap8];
+    [star10 addGestureRecognizer:newTap9];
+
+
+
+
+}
+NSString *ocena=0;
+
+-(void)myTapMethod{
+    
+    star1.image = [UIImage imageNamed:@"star_on.png"];
+    star2.image = [UIImage imageNamed:@"star.png"];
+    star3.image = [UIImage imageNamed:@"star.png"];
+    star4.image = [UIImage imageNamed:@"star.png"];
+    star5.image = [UIImage imageNamed:@"star.png"];
+    star6.image = [UIImage imageNamed:@"star.png"];
+    star7.image = [UIImage imageNamed:@"star.png"];
+    star8.image = [UIImage imageNamed:@"star.png"];
+    star9.image = [UIImage imageNamed:@"star.png"];
+    star10.image = [UIImage imageNamed:@"star.png"];
+    ocena = @"1";
+    if(rate_m == 1)
+    {
+        rate_m = 0;
+    }
+    else
+    [self guest];
+    
+
+}
+-(void)myTapMethod1{
+    
+    star1.image = [UIImage imageNamed:@"star_on.png"];
+    star2.image = [UIImage imageNamed:@"star_on.png"];
+    star3.image = [UIImage imageNamed:@"star.png"];
+    star4.image = [UIImage imageNamed:@"star.png"];
+    star5.image = [UIImage imageNamed:@"star.png"];
+    star6.image = [UIImage imageNamed:@"star.png"];
+    star7.image = [UIImage imageNamed:@"star.png"];
+    star8.image = [UIImage imageNamed:@"star.png"];
+    star9.image = [UIImage imageNamed:@"star.png"];
+    star10.image = [UIImage imageNamed:@"star.png"];
+    ocena = @"2";
+    if(rate_m == 1)
+    {
+        rate_m = 0;
+    }
+    else
+        [self guest];
+}-(void)myTapMethod2{
+    
+    star1.image = [UIImage imageNamed:@"star_on.png"];
+    star2.image = [UIImage imageNamed:@"star_on.png"];
+    star3.image = [UIImage imageNamed:@"star_on.png"];
+    star4.image = [UIImage imageNamed:@"star.png"];
+    star5.image = [UIImage imageNamed:@"star.png"];
+    star6.image = [UIImage imageNamed:@"star.png"];
+    star7.image = [UIImage imageNamed:@"star.png"];
+    star8.image = [UIImage imageNamed:@"star.png"];
+    star9.image = [UIImage imageNamed:@"star.png"];
+    star10.image = [UIImage imageNamed:@"star.png"];
+    ocena = @"3";
+    if(rate_m == 1)
+    {
+        rate_m = 0;
+    }
+    else
+        [self guest];
+}-(void)myTapMethod3{
+    
+    star1.image = [UIImage imageNamed:@"star_on.png"];
+    star2.image = [UIImage imageNamed:@"star_on.png"];
+    star3.image = [UIImage imageNamed:@"star_on.png"];
+    star4.image = [UIImage imageNamed:@"star_on.png"];
+    star5.image = [UIImage imageNamed:@"star.png"];
+    star6.image = [UIImage imageNamed:@"star.png"];
+    star7.image = [UIImage imageNamed:@"star.png"];
+    star8.image = [UIImage imageNamed:@"star.png"];
+    star9.image = [UIImage imageNamed:@"star.png"];
+    star10.image = [UIImage imageNamed:@"star.png"];
+    ocena = @"4";
+    if(rate_m == 1)
+    {
+        rate_m = 0;
+    }
+    else
+        [self guest];
+}-(void)myTapMethod4{
+    
+    star1.image = [UIImage imageNamed:@"star_on.png"];
+    star2.image = [UIImage imageNamed:@"star_on.png"];
+    star3.image = [UIImage imageNamed:@"star_on.png"];
+    star4.image = [UIImage imageNamed:@"star_on.png"];
+    star5.image = [UIImage imageNamed:@"star_on.png"];
+    star6.image = [UIImage imageNamed:@"star.png"];
+    star7.image = [UIImage imageNamed:@"star.png"];
+    star8.image = [UIImage imageNamed:@"star.png"];
+    star9.image = [UIImage imageNamed:@"star.png"];
+    star10.image = [UIImage imageNamed:@"star.png"];
+    ocena = @"5";
+    if(rate_m == 1)
+    {
+        rate_m = 0;
+    }
+    else
+        [self guest];
+}-(void)myTapMethod5{
+    
+    star1.image = [UIImage imageNamed:@"star_on.png"];
+    star2.image = [UIImage imageNamed:@"star_on.png"];
+    star3.image = [UIImage imageNamed:@"star_on.png"];
+    star4.image = [UIImage imageNamed:@"star_on.png"];
+    star5.image = [UIImage imageNamed:@"star_on.png"];
+    star6.image = [UIImage imageNamed:@"star_on.png"];
+    star7.image = [UIImage imageNamed:@"star.png"];
+    star8.image = [UIImage imageNamed:@"star.png"];
+    star9.image = [UIImage imageNamed:@"star.png"];
+    star10.image = [UIImage imageNamed:@"star.png"];
+    ocena = @"6";
+    if(rate_m == 1)
+    {
+        rate_m = 0;
+    }
+    else
+        [self guest];
+}-(void)myTapMethod6{
+    
+    star1.image = [UIImage imageNamed:@"star_on.png"];
+    star2.image = [UIImage imageNamed:@"star_on.png"];
+    star3.image = [UIImage imageNamed:@"star_on.png"];
+    star4.image = [UIImage imageNamed:@"star_on.png"];
+    star5.image = [UIImage imageNamed:@"star_on.png"];
+    star6.image = [UIImage imageNamed:@"star_on.png"];
+    star7.image = [UIImage imageNamed:@"star_on.png"];
+    star8.image = [UIImage imageNamed:@"star.png"];
+    star9.image = [UIImage imageNamed:@"star.png"];
+    star10.image = [UIImage imageNamed:@"star.png"];
+    ocena = @"7";
+    if(rate_m == 1)
+    {
+        rate_m = 0;
+    }
+    else
+        [self guest];
+}
+-(void)myTapMethod7{
+    
+    star1.image = [UIImage imageNamed:@"star_on.png"];
+    star2.image = [UIImage imageNamed:@"star_on.png"];
+    star3.image = [UIImage imageNamed:@"star_on.png"];
+    star4.image = [UIImage imageNamed:@"star_on.png"];
+    star5.image = [UIImage imageNamed:@"star_on.png"];
+    star6.image = [UIImage imageNamed:@"star_on.png"];
+    star7.image = [UIImage imageNamed:@"star_on.png"];
+    star8.image = [UIImage imageNamed:@"star_on.png"];
+    star9.image = [UIImage imageNamed:@"star.png"];
+    star10.image = [UIImage imageNamed:@"star.png"];
+    ocena = @"8";
+    if(rate_m == 1)
+    {
+        rate_m = 0;
+    }
+    else
+        [self guest];
+}
+-(void)myTapMethod8{
+    
+    star1.image = [UIImage imageNamed:@"star_on.png"];
+    star2.image = [UIImage imageNamed:@"star_on.png"];
+    star3.image = [UIImage imageNamed:@"star_on.png"];
+    star4.image = [UIImage imageNamed:@"star_on.png"];
+    star5.image = [UIImage imageNamed:@"star_on.png"];
+    star6.image = [UIImage imageNamed:@"star_on.png"];
+    star7.image = [UIImage imageNamed:@"star_on.png"];
+    star8.image = [UIImage imageNamed:@"star_on.png"];
+    star9.image = [UIImage imageNamed:@"star_on.png"];
+    star10.image = [UIImage imageNamed:@"star.png"];
+    ocena = @"9";
+    if(rate_m == 1)
+    {
+        rate_m = 0;
+    }
+    else
+        [self guest];
+}
+-(void)myTapMethod9{
+    
+    star1.image = [UIImage imageNamed:@"star_on.png"];
+    star2.image = [UIImage imageNamed:@"star_on.png"];
+    star3.image = [UIImage imageNamed:@"star_on.png"];
+    star4.image = [UIImage imageNamed:@"star_on.png"];
+    star5.image = [UIImage imageNamed:@"star_on.png"];
+    star6.image = [UIImage imageNamed:@"star_on.png"];
+    star7.image = [UIImage imageNamed:@"star_on.png"];
+    star8.image = [UIImage imageNamed:@"star_on.png"];
+    star9.image = [UIImage imageNamed:@"star_on.png"];
+    star10.image = [UIImage imageNamed:@"star_on.png"];
+    ocena = @"10";
+    if(rate_m == 1)
+    {
+        rate_m = 0;
+    }
+    else
+        [self guest];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

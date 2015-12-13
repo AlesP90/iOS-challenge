@@ -21,9 +21,20 @@
     NSMutableArray *Vote_count;
     NSMutableArray *Genres;
     NSMutableArray *Overview;
+    
+    NSMutableArray *Character;
+    NSMutableArray *Name;
+    NSMutableArray *Picture;
+    IBOutlet UIView *cast_view;
+    UILabel *lb_character;
+    UILabel *lb_name;
+    UIImageView *img_picture;
+    
+    NSMutableArray *guest_id;
 
     IBOutlet UIScrollView *scroller;
     IBOutlet UIScrollView *scroller_genre;
+    IBOutlet UIScrollView *scroller_cast;
 
     IBOutlet UIImageView *Image;
     IBOutlet UIButton *Playbutton;
@@ -40,7 +51,8 @@
     IBOutlet UILabel *lb_movie_release;
     IBOutlet UILabel *lb_movie_run;
     IBOutlet UILabel *lb_movie_revenue;
-    
+    IBOutlet UILabel *lb_movie_rating;
+
     IBOutlet UILabel *lb_movie_tagline;
     IBOutlet UILabel *lb_movie_vote_average;
     IBOutlet UILabel *lb_movie_vote_count;
@@ -54,6 +66,20 @@
 
     IBOutlet UIButton *btn_buy;
     IBOutlet UIButton *btn_share;
+    
+    
+    IBOutlet UIImageView *star1;
+    IBOutlet UIImageView *star2;
+    IBOutlet UIImageView *star3;
+    IBOutlet UIImageView *star4;
+    IBOutlet UIImageView *star5;
+    IBOutlet UIImageView *star6;
+    IBOutlet UIImageView *star7;
+    IBOutlet UIImageView *star8;
+    IBOutlet UIImageView *star9;
+    IBOutlet UIImageView *star10;
+    
+    int rate_m;
 
 
 }

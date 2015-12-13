@@ -17,6 +17,8 @@
 		4011713D1C1B1343000737ED /* iOS_challengeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4011713C1C1B1343000737ED /* iOS_challengeUITests.m */; };
 		4011714C1C1B2006000737ED /* playico.png in Resources */ = {isa = PBXBuildFile; fileRef = 4011714B1C1B2006000737ED /* playico.png */; };
 		4011714E1C1B3546000737ED /* playico1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4011714D1C1B3546000737ED /* playico1.png */; };
+		40ECE44E1C1D863200E2A553 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 40ECE44D1C1D863200E2A553 /* star.png */; };
+		40ECE4501C1D863700E2A553 /* star_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 40ECE44F1C1D863700E2A553 /* star_on.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		4011713E1C1B1343000737ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4011714B1C1B2006000737ED /* playico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playico.png; sourceTree = "<group>"; };
 		4011714D1C1B3546000737ED /* playico1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playico1.png; sourceTree = "<group>"; };
+		40ECE44D1C1D863200E2A553 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
+		40ECE44F1C1D863700E2A553 /* star_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_on.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +154,8 @@
 			children = (
 				4011714B1C1B2006000737ED /* playico.png */,
 				4011714D1C1B3546000737ED /* playico1.png */,
+				40ECE44D1C1D863200E2A553 /* star.png */,
+				40ECE44F1C1D863700E2A553 /* star_on.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -261,7 +267,9 @@
 				4011714E1C1B3546000737ED /* playico1.png in Resources */,
 				401171241C1B1343000737ED /* Assets.xcassets in Resources */,
 				401171221C1B1343000737ED /* Main.storyboard in Resources */,
+				40ECE4501C1D863700E2A553 /* star_on.png in Resources */,
 				4011714C1C1B2006000737ED /* playico.png in Resources */,
+				40ECE44E1C1D863200E2A553 /* star.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,6 +524,7 @@
 				401171431C1B1343000737ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		401171441C1B1343000737ED /* Build configuration list for PBXNativeTarget "iOS challengeTests" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +533,7 @@
 				401171461C1B1343000737ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		401171471C1B1343000737ED /* Build configuration list for PBXNativeTarget "iOS challengeUITests" */ = {
 			isa = XCConfigurationList;
@@ -532,6 +542,7 @@
 				401171491C1B1343000737ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
